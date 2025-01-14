@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageProducer {
 
-    private Logger log = LoggerFactory.getLogger(MessageProducer.class);
+    private final Logger log = LoggerFactory.getLogger(MessageProducer.class);
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -19,7 +19,7 @@ public class MessageProducer {
     private String topic;
 
     public void sendMessage(String message) {
-        log.info("MESSAGE SENT FROM PRODUCER END -> " + message);
+        log.info("MESSAGE SENT FROM PRODUCER END -> {}", message);
         kafkaTemplate.send(topic, message);
     }
 }

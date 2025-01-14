@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageConsumer {
 
-    private Logger log = LoggerFactory.getLogger(MessageConsumer.class);
+    private final Logger log = LoggerFactory.getLogger(MessageConsumer.class);
 
     @Autowired
     private MessageRepository messageRepo;
 
     @KafkaListener(topics = "${myapp.kafka.topic}", groupId = "xyz")
     public void consume(String message) {
-        log.info("MESSAGE RECEIVED AT CONSUMER END -> " + message);
+        log.info("MESSAGE RECEIVED AT CONSUMER END -> {}", message);
         messageRepo.addMessage(message);
     }
 }
